@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Calendar from "react-calendar";
+import ReactCalendar from "react-calendar";
+import Calendar from "@/components/Calendar/Calendar";
 import "react-calendar/dist/Calendar.css";
 
 type SingleDateType = Date | null;
 type DateValueType = SingleDateType | [SingleDateType, SingleDateType];
-
 export default function CalenderPage() {
-  const [value, onChange] = useState<DateValueType>(new Date());
+  const [value, setValue] = useState<DateValueType>(new Date());
 
   useEffect(() => {
     console.log(value);
@@ -14,7 +14,13 @@ export default function CalenderPage() {
 
   return (
     <div>
-      <Calendar locale="ko" onChange={onChange} value={value} />
+      <ReactCalendar locale="ko" onChange={setValue} value={value} />
+      <Calendar
+        selectedDay={value}
+        setSelectedDay={setValue}
+        isNextMonth={true}
+        isPrevMonth={true}
+      />
     </div>
   );
 }
